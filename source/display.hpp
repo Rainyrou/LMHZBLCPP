@@ -7,6 +7,15 @@
 #include "sevsegdisp.hpp"
 #include "colour.hpp"
 
+
+void clearScreen() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
 void dispBanner()
 { 
     std::cout << blue_fg;
@@ -103,7 +112,8 @@ void setGameMode()
         }
         else
             gameMode = (GAME_MODE)ch;
-        system("clear");
+
+        clearScreen();
 
     } while (ch < 1 || ch > 4);
 }
@@ -135,9 +145,9 @@ void getQuickClearSettings()
             auto c = getch();
         }
         else
-            QUICKCLEAR = std::tolower(ch) == 'y' ? true : false;
+            QUICKCLEAR = std::tolower(ch) == 'y';
         
-        system("clear");
+        clearScreen();
 
 
     } while (!(ch == 'y' || ch == 'n'));

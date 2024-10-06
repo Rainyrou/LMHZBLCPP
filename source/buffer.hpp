@@ -10,7 +10,7 @@ class Buffer
     Buffer();
     friend Buffer &operator<<(Buffer &curr, const std::string &str);
     void goToLine(int);
-    int getCurrLine();
+    int getCurrLine() const;
     void disp();
     void clear();
 
@@ -23,7 +23,7 @@ class Buffer
 
 Buffer::Buffer()
 {
-    buf.push_back("");
+    buf.emplace_back("");
     line = 0;
     size = 1;
 }
@@ -34,7 +34,7 @@ Buffer &operator<<(Buffer &curr, const std::string &str)
     {
         if (curr.line == curr.size - 1)
         {
-            curr.buf.push_back("");
+            curr.buf.emplace_back("");
             ++curr.line;
             ++curr.size;
         }
@@ -57,14 +57,14 @@ void Buffer::goToLine(int n)
         line = n;
 }
 
-int Buffer::getCurrLine()
+int Buffer::getCurrLine() const
 {
     return line;
 }
 void Buffer::disp()
 {
     goToLine(0);
-    for (auto str : buf)
+    for (const auto& str : buf)
         std::cout << str << std::endl;
 }
 

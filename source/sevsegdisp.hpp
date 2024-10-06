@@ -103,7 +103,7 @@ class SevSegDisp{
         }
         
         void set(int);
-        void update(std::string);
+        void update(const std::string&);
 
     
     private:
@@ -120,7 +120,7 @@ void SevSegDisp::set(int n){
     number = n;
 }
 
-void SevSegDisp::update(std::string prepend){
+void SevSegDisp::update(const std::string& prepend){
     int homeLine = writeBuf.getCurrLine();
     int nos[noOfDigits];
     int num = number;

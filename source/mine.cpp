@@ -6,7 +6,10 @@
 
 int main()
 {
-    system("clear");
+#ifdef _WIN32
+    system("chcp 65001");
+#endif
+    clearScreen();
     setGameMode();
     getQuickClearSettings();
 
@@ -14,7 +17,7 @@ int main()
 
     while (true)
     {
-        system("clear");
+        clearScreen();
 
         dispBanner();
         field.drawField();

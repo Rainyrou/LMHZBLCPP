@@ -1,7 +1,11 @@
 #pragma once
 
 #include <unistd.h>
+#ifdef _WIN32
+#include <conio.h>
+#elif defined(__unix__) || defined(__APPLE__) && defined(__MACH__)
 #include <termios.h>
+#endif
 
 enum GAME_MODE
 {
@@ -73,7 +77,13 @@ enum VI_KEYS
 	K_h = 104,
 	K_l = 108
 };
-
+#ifdef _WIN32
+//char getch()
+//{
+//    return _getch();
+//}
+//
+#elif defined(__unix__) || defined(__APPLE__) && defined(__MACH__)
 char getch()
 {
 	char buf = 0;
@@ -94,7 +104,7 @@ char getch()
 		perror("tcsetattr ~ICANON");
 	return (buf);
 }
-
+#endif
 KEY getKey()
 {
 	char c = getch();
